@@ -33,7 +33,7 @@ const userSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: true, // تم ضبطه ليكون مطلوباً لحين إضافة نظام Google Auth لاحقاً
+        required: true,  
     },
     gender: {
         type: String,

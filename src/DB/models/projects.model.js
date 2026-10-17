@@ -12,7 +12,7 @@ const projectsschema = new mongoose.Schema({
   },
   companyId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Company", // تأكدي إنها مطابقة لاسم موديل الشركة عندك
+    ref: "Company", 
     required: true,
   },
   departmentId: { 

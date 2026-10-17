@@ -13,26 +13,26 @@ dotenv.config({ path: "./src/DB/config/.env.dev" });
 
 async function runSystemTest() {
   try {
-    // 1. الاتصال بقاعدة البيانات
+    // 1. Connect to database
     await mongoose.connect(process.env.DB_URI);
     console.log("🚀 Connected to MongoDB successfully!");
 
-    // 2. إنشاء شركة تجريبية
+    // 2. Create a test company
     const company = await CompanyModel.create({
       name: `Virtual Enterprise Test ${Date.now()}`,
       description: "Testing full DB structure"
     });
     console.log("✅ Company Created:", company._id);
 
-   // 3. إنشاء قسم تجريبي (باسم متغير عشان ميكحصلش تكرار)
+    // 3. Create a test department (with dynamic name to avoid duplication)
     const department = await DepartmentModel.create({
       name: `IT Department ${Date.now()}`,
       company_id: company._id,
       description: "Software Engineering Division"
     });
-    console.log("✅ Department Created:", department._id);-
+    console.log("✅ Department Created:", department._id);
 
-    // 4. إنشاء مستخدم تجريبي
+    // 4. Create a test user
     const user = await UserModel.create({
       name: "Haneen",
       email: `haneen_${Date.now()}@virtual.com`,
@@ -42,7 +42,7 @@ async function runSystemTest() {
     });
     console.log("✅ User Created:", user._id);
 
-    // 5. إنشاء مشروع تجريبي
+    // 5. Create a test project
     const project = await ProjectModel.create({
       name: "AI Workplace Presence System",
       description: "Graduation project testing",
@@ -52,7 +52,7 @@ async function runSystemTest() {
     });
     console.log("✅ Project Created:", project._id);
 
-    // 6. إنشاء مهمة تجريبية
+    // 6. Create a test task
     const task = await TaskModel.create({
       title: "Design Database Schemas",
       description: "Complete all Mongoose models",
@@ -63,7 +63,7 @@ async function runSystemTest() {
     });
     console.log("✅ Task Created:", task._id);
 
-    // 7. إنشاء حدث حضور تجريبي (Presence Event)
+    // 7. Create a test presence event
     const presence = await PresenceEventModel.create({
       userId: user._id,
       eventType: "CHECK_IN",
@@ -72,7 +72,7 @@ async function runSystemTest() {
     });
     console.log("✅ Presence Event Created:", presence._id);
 
-    // 8. إنشاء مستند تجريبي (Document)
+    // 8. Create a test document
     const document = await DocumentModel.create({
       title: "Project Architecture Blueprint",
       fileUrl: "https://example.com/files/architecture.pdf",
@@ -82,7 +82,7 @@ async function runSystemTest() {
     });
     console.log("✅ Document Created:", document._id);
 
-    // 9. إنشاء سجل أمني تجريبي (Audit Log)
+    // 9. Create a test audit log
     const auditLog = await AuditLogModel.create({
       userId: user._id,
       action: "ADMIN_LOGIN_SUCCESS",
@@ -92,7 +92,7 @@ async function runSystemTest() {
     });
     console.log("✅ Audit Log Created:", auditLog._id);
 
-    console.log("🎉 All 8 models and database relations are working 100% perfectly!");
+    console.log(" All 8 models and database relations are working 100% perfectly!");
     process.exit(0);
   } catch (error) {
     console.error("❌ Test failed with error:", error);

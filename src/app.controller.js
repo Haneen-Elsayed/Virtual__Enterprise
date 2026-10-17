@@ -1,21 +1,25 @@
 import connectDB from "./DB/connection.js";
+import presenceRouter from './Modules/presence/presence.routes.js';
 
 const bootstrap = async (app, express) => {
-  // قراءة بيانات الـ JSON
+  // Parse incoming JSON requests
   app.use(express.json());
 
-  // الاتصال بقاعدة البيانات
+  // Connect to database
   await connectDB();
 
-  // الراوت الأساسي للتجربة
+  // Mount presence routes
+  app.use('/api/v1/presence', presenceRouter);
+
+  // Default welcome route
   app.get("/", (req, res) => {
     res.json({ message: "Welcome to Virtual Enterprise API!" });
   });
 
-  // معالجة الروابط غير الخاطئة
- app.use('{*splat}', (req, res) => {
-  res.status(404).json({ message: "In-valid endpoint" });
-});
+  // Handle invalid/unsupported endpoints
+  app.use('{*splat}', (req, res) => {
+    res.status(404).json({ message: "In-valid endpoint" });
+  });
 };
 
 export default bootstrap;

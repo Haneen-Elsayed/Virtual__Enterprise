@@ -16,7 +16,7 @@ const presenceEventsSchema = new mongoose.Schema({
         default: Date.now,
     },
     confidenceScore: {
-        type: Number, // نسبة الدقة للذكاء الاصطناعي في التعرف على الوجه
+        type: Number, 
     },
     location: {
         type: String,
